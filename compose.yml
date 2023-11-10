@@ -1,0 +1,37 @@
+services:
+  nats:
+    image: nats:latest
+    restart: always
+    command: --js
+    ports:
+      - "4222:4222"
+    hostname:
+      nats
+  db:
+    image: postgres:latest
+    restart: always
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5431:5432"
+  manager:
+    image: smoothsail/manager:latest
+    depends_on:
+      - db
+      - nats
+    ports:
+      - "3000:3000"
+    environment:
+      - PGUSER=postgres
+      - PGHOST=db
+      - PGDATABASE=postgres
+      - SDKKEYSDB=postgres
+      - PGPASSWORD=postgres
+      - PGPORT=5431
+      - SECRET_KEY=ZJmhI0xnFshMuMB+1Qlia5Fof4pbdApR
+      - NATS_SERVER=nats://localhost:4222
+      - LOGLEVEL=info
+    
