@@ -12,26 +12,25 @@ services:
     restart: always
     volumes:
       - ./pgdata:/var/lib/postgresql/data
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
     ports:
-      - "5431:5432"
+      - "${PGPORT}:${PGPORT}"
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
   manager:
     image: smoothsail/manager:latest
     depends_on:
       - db
       - nats
+    volumes:
+      - ./logs:/app/logs
     ports:
-      - "3000:3000"
+      - "${PORT}:${PORT}"
     environment:
+      - PORT
+      - PGPASSWORD=postgres
       - PGUSER=postgres
       - PGHOST=db
       - PGDATABASE=postgres
       - SDKKEYSDB=postgres
-      - PGPASSWORD=postgres
-      - PGPORT=5431
-      - SECRET_KEY=ZJmhI0xnFshMuMB+1Qlia5Fof4pbdApR
-      - NATS_SERVER=nats://localhost:4222
+      - NATS_SERVER=nats://nats:4222
       - LOGLEVEL=info
-    
