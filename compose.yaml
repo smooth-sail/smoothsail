@@ -4,7 +4,7 @@ services:
     restart: always
     command: --js
     ports:
-      - "4222:4222"
+      - "${NATS_PORT}:${NATS_PORT}"
     hostname:
       nats
   db:
@@ -26,11 +26,27 @@ services:
     ports:
       - "${PORT}:${PORT}"
     environment:
+      - SECRET_KEY
       - PORT
-      - PGPASSWORD=postgres
+      - PGPASSWORD=${POSTGRES_PASSWORD}
       - PGUSER=postgres
       - PGHOST=db
       - PGDATABASE=postgres
       - SDKKEYSDB=postgres
-      - NATS_SERVER=nats://nats:4222
+      - NATS_SERVER=nats://nats:${NATS_PORT}
+      - LOGLEVEL=info
+  sdk-service:
+    image: smoothsail/sdk-service:latest
+    depends_on:
+      - nats
+      - manager
+      - db
+    volumes:
+      - ./logs:/app/logs
+    ports:
+      - "${SDK_SERVICE_PORT}:${SDK_SERVICE_PORT}"
+    environment:
+      - RATE_LIMIT
+      - PORT=${SDK_SERVICE_PORT}
+      - NATS_SERVER=nats://nats:${NATS_PORT}
       - LOGLEVEL=info
