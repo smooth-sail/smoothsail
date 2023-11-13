@@ -37,6 +37,7 @@ services:
       - LOGLEVEL=info
   sdk-service:
     image: smoothsail/sdk-service:latest
+    restart: always
     depends_on:
       - nats
       - manager
