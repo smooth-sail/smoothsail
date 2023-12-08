@@ -4,12 +4,14 @@ There are two ways developers can get started with SmoothSail:
 
 - [Docker](#1-setting-up-smoothsail): The easiest, and quickest, way to get up and running with SmoothSail is to to use Docker. This will run each component of SmoothSail with limited configuration.
 - Run components locally: For developers who want complete control and customization they can run each component locally. Each SmoothSail component's GitHub repo is available with documentation to get up and running.
-  - [Manager Platform]()
-  - [SDK Service]()
+  - [Manager Platform](https://github.com/smooth-sail/smoothsail-manager)
+  - [SDK Service](https://github.com/smooth-sail/smoothsail-sdk-service)
 
 ### 1. Setting Up SmoothSail
 
 To get started with SmoothSail, you need [`git`](https://git-scm.com/) and [`docker`](https://www.docker.com/) installed on your machine.
+
+Run the following commands:
 
 ```bash
 git clone https://github.com/smooth-sail/smoothsail.git
