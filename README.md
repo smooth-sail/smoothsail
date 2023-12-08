@@ -2,8 +2,8 @@
 
 There are two ways developers can get started with SmoothSail:
 
-- [Docker](#1-setting-up-smoothsail): The easiest, and quickest, way to get up and running with SmoothSail is to to use Docker. This will run each component of SmoothSail with limited configuration.
-- Run components locally: For developers who want complete control and customization they can run each component locally. Each SmoothSail component's GitHub repo is available with documentation to get up and running.
+- [Docker](#1-setting-up-smoothsail): The easiest, and quickest, way to get up and running with SmoothSail is to to use Docker. This will run each piece of SmoothSail's architecture with limited configuration.
+- Run locally: For developers who want complete control and customization they can run each component locally. Each SmoothSail component's GitHub repo is available with documentation to get up and running.
   - [Manager Platform](https://github.com/smooth-sail/smoothsail-manager)
   - [SDK Service](https://github.com/smooth-sail/smoothsail-sdk-service)
 
@@ -23,7 +23,7 @@ Next, configure your `.env` file.
 In order to secure your feature flag API you'll need to provide a 32 character secret key. This should be added to the `.env` file for the `SECRET_KEY` value.
 
 ```
-SECRET_KEY=YOUR_SECRET
+SECRET_KEY=<YOUR_SECRET>
 ```
 
 Execute the following command in order to start the application:
